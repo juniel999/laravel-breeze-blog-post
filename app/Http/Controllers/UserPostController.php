@@ -84,7 +84,6 @@ class UserPostController extends Controller
             ->with('user')
             ->get();
 
-
         return view('user-posts/show', [
             'post' => $post,
             'comments' => $comments
