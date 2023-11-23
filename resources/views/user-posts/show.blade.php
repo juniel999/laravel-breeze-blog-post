@@ -25,12 +25,12 @@
         <hr class="mt-3">
 
         <h2 class="font-semibold text-gray-800 dark:text-white mt-3 text-2xl">Comments</h2>
-        @if($post->comments->isEmpty())
+        @if($comments->isEmpty())
             <p class="mt-3 pl-4">No comments yet.</p>
         @endif
 
         {{-- comment cards --}}
-        @foreach($post->comments as $comment)
+        @foreach($comments as $comment)
             <x-comments.card :comment="$comment" />
         @endforeach
 

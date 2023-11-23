@@ -77,8 +77,17 @@ class UserPostController extends Controller
      */
     public function show(Post $post)
     {
+        $comments = Post::find($post->id)->comments()
+            ->with(['replies' => function ($query) {
+                $query->with('user');
+            }])
+            ->with('user')
+            ->get();
+
+
         return view('user-posts/show', [
-            'post' => $post
+            'post' => $post,
+            'comments' => $comments
         ]);
     }
 
