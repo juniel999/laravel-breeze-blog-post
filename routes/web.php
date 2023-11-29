@@ -14,13 +14,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    //admin-super admins functionalities
-    Route::prefix('admin')->group(function () {
-        Route::resource('posts', PostController::class);
-        Route::resource('posts.comments', CommentController::class);
-        Route::post('{comment}/replies', [ReplyController::class ,'store'])->name('comments.store');
-        Route::resource('categories', CategoryController::class);
+    
+    Route::resource('posts.comments', CommentController::class);
+    Route::post('{comment}/replies', [ReplyController::class ,'store'])->name('comments.store');
+    
+    //admins functionalities
+    Route::middleware('isAdmin')->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::resource('posts', PostController::class);
+            Route::resource('categories', CategoryController::class);
+        });
     });
 });
 
@@ -35,9 +38,5 @@ Route::resource('/posts', UserPostController::class)->names([
     'update' => 'user-posts.update',
     'destroy' => 'user-posts.destroy',
 ]);
-
-
-
-
 
 require __DIR__.'/auth.php';

@@ -15,7 +15,7 @@ class UserPostController extends Controller
     public function index()
     {
         return view('user-posts/index',[
-            'posts' => Post::orderBy('created_at', 'desc')->with(['tags','user'])->paginate(3)
+            'posts' => Post::orderBy('created_at', 'desc')->with(['tags','user', 'category'])->paginate(7)
         ]);
     }
 
@@ -82,7 +82,7 @@ class UserPostController extends Controller
                 $query->with('user');
             }])
             ->with('user')
-            ->get();
+            ->paginate(5);
 
         return view('user-posts/show', [
             'post' => $post,

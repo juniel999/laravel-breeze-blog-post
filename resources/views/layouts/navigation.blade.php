@@ -46,6 +46,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        @if(Auth::user()->role == 1)
                         <x-dropdown-link :href="route('posts.index')">
                             {{ __('Posts') }}
                         </x-dropdown-link>
@@ -53,6 +54,7 @@
                         <x-dropdown-link :href="route('categories.index')">
                             {{ __('Categories') }}
                         </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

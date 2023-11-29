@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto max-w-7xl mt-6 p-4 text-black dark:text-gray-300">
-        <h1 class="font-semibold text-[3.5rem] text-gray-800 dark:text-gray-200 leading-tight">{{$post->title}}</h1>
+        <h1 class="font-semibold text-[3.5rem] text-gray-800 dark:text-gray-200 leading-tight"><span class="text-cyan-600">[{{$post->category->name}}]</span> <br> {{$post->title}}</h1>
       
         @foreach($post->tags as $tag)
             <x-tags.tag-item class="text-lg">{{$tag->name}}</x-tags.tag-item>
